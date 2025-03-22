@@ -23,6 +23,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
+    private final StockService stockService;
+
 
     /**
      * 주문
@@ -46,6 +48,10 @@ public class OrderService {
         //주문저장
         orderRepository.save(oRder);
 
+        // Redis에 업데이트된 재고 정보 저장
+        stockService.updateStockAfterOrder(itemId, item.getStockQuantity());
+
+
         return oRder.getId();
     }
 
@@ -59,6 +65,12 @@ public class OrderService {
         Order order = orderRepository.findOne(orderId);
         //주문취소
         order.cancel();
+
+        // Redis에 재고 정보 업데이트
+        for (OrderItem orderItem : order.getOrderItems()) {
+            Item item = orderItem.getItem();
+            stockService.updateStockAfterCancel(item.getId(), item.getStockQuantity());
+        }
     }
 
 
