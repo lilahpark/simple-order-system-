@@ -39,43 +39,7 @@ Spring Boot, Spring MVC, JPA, Thymeleaf, Redis, Docker, JavaScript
 
 ## 📁 프로젝트 구조
 
-📦 src
- ┗ 📂 main
-    ┗ 📂 java
-       ┗ 📂 jpabook
-          ┗ 📂 jpashop
-             ┣ 📂 controller                        # 웹 요청 처리 (Spring MVC 컨트롤러)
-             ┃ ┣ 📜 BookForm.java                  # 도서 등록 폼 DTO
-             ┃ ┣ 📜 HomeController.java            # 홈 화면 라우팅
-             ┃ ┣ 📜 ItemController.java            # 상품 관련 요청 처리
-             ┃ ┣ 📜 MemberController.java          # 회원 등록 및 조회
-             ┃ ┣ 📜 OrderController.java           # 주문 등록/조회/취소 처리
-             ┃ ┣ 📜 RedisTestController.java       # Redis 테스트용 컨트롤러
-             ┃ ┗ 📜 StockController.java           # 재고 관리 처리
-             ┣ 📂 domain                            # 핵심 도메인 모델 (JPA 엔티티)
-             ┃ ┣ 📂 item
-             ┃ ┃ ┣ 📜 Address.java                 # 배송지 정보 Value Object
-             ┃ ┃ ┣ 📜 Category.java                # 상품 분류
-             ┃ ┃ ┣ 📜 Delivery.java                # 배송 엔티티
-             ┃ ┃ ┣ 📜 DeliveryStatus.java         # 배송 상태 (ENUM)
-             ┃ ┃ ┣ 📜 Member.java                  # 회원 엔티티
-             ┃ ┃ ┣ 📜 Order.java                   # 주문 엔티티 (주문자, 상태 등 포함)
-             ┃ ┃ ┣ 📜 OrderItem.java               # 주문 상품 상세 (상품, 수량, 가격 등)
-             ┃ ┃ ┗ 📜 OrderStatus.java            # 주문 상태 (ENUM)
-             ┣ 📂 exception                         # 커스텀 예외 정의
-             ┃ ┗ 📜 NotEnoughStockException.java   # 재고 부족 시 발생 예외
-             ┣ 📂 repository                        # 데이터베이스 접근 계층
-             ┃ ┣ 📜 ItemRepository.java            # 상품 관련 쿼리 처리
-             ┃ ┣ 📜 MemberRepository.java          # 회원 관련 쿼리 처리
-             ┃ ┣ 📜 OrderRepository.java           # 주문 관련 쿼리 처리
-             ┃ ┗ 📜 OrderSearch.java               # 주문 검색 조건 DTO
-             ┣ 📂 service                           # 핵심 비즈니스 로직 처리
-             ┃ ┣ 📜 HelloController.java           # 단순 테스트용 컨트롤러
-             ┃ ┣ 📜 ItemService.java               # 상품 등록/수정 비즈니스 로직
-             ┃ ┣ 📜 MemberService.java             # 회원 등록 비즈니스 로직
-             ┃ ┣ 📜 OrderService.java              # 주문 생성/취소 로직
-             ┃ ┗ 📜 StockService.java              # 재고 증가/감소 처리
-             ┗ 📜 JpashopApplication.java           # Spring Boot 애플리케이션 실행 클래스
+<pre><code>📦 src ┗ 📂 main ┗ 📂 java ┗ 📂 jpabook ┗ 📂 jpashop ┣ 📂 controller # 웹 요청 처리 (Spring MVC 컨트롤러) ┃ ┣ 📜 BookForm.java # 도서 등록 폼 DTO ┃ ┣ 📜 HomeController.java # 홈 화면 라우팅 ┃ ┣ 📜 ItemController.java # 상품 관련 요청 처리 ┃ ┣ 📜 MemberController.java # 회원 등록 및 조회 ┃ ┣ 📜 OrderController.java # 주문 등록/조회/취소 처리 ┃ ┣ 📜 RedisTestController.java# Redis 테스트용 컨트롤러 ┃ ┗ 📜 StockController.java # 재고 관리 처리 ┣ 📂 domain # 핵심 도메인 모델 (JPA 엔티티) ┃ ┣ 📂 item ┃ ┃ ┣ 📜 Address.java # 배송지 정보 Value Object ┃ ┃ ┣ 📜 Category.java # 상품 분류 ┃ ┃ ┣ 📜 Delivery.java # 배송 엔티티 ┃ ┃ ┣ 📜 DeliveryStatus.java # 배송 상태 (ENUM) ┃ ┃ ┣ 📜 Member.java # 회원 엔티티 ┃ ┃ ┣ 📜 Order.java # 주문 엔티티 (주문자, 상태 등 포함) ┃ ┃ ┣ 📜 OrderItem.java # 주문 상품 상세 (상품, 수량, 가격 등) ┃ ┃ ┗ 📜 OrderStatus.java # 주문 상태 (ENUM) ┣ 📂 exception # 커스텀 예외 정의 ┃ ┗ 📜 NotEnoughStockException.java # 재고 부족 시 발생 예외 ┣ 📂 repository # 데이터베이스 접근 계층 ┃ ┣ 📜 ItemRepository.java # 상품 관련 쿼리 처리 ┃ ┣ 📜 MemberRepository.java # 회원 관련 쿼리 처리 ┃ ┣ 📜 OrderRepository.java # 주문 관련 쿼리 처리 ┃ ┗ 📜 OrderSearch.java # 주문 검색 조건 DTO ┣ 📂 service # 핵심 비즈니스 로직 처리 ┃ ┣ 📜 HelloController.java # 단순 테스트용 컨트롤러 ┃ ┣ 📜 ItemService.java # 상품 등록/수정 비즈니스 로직 ┃ ┣ 📜 MemberService.java # 회원 등록 비즈니스 로직 ┃ ┣ 📜 OrderService.java # 주문 생성/취소 로직 ┃ ┗ 📜 StockService.java # 재고 증가/감소 처리 ┗ 📜 JpashopApplication.java # Spring Boot 애플리케이션 실행 클래스 </code></pre>
 
 ```
 
