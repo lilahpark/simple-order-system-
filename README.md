@@ -74,6 +74,15 @@ GET	/api/items/{itemId}/stock	선택한 상품의 재고 수량을 조회합니�
 POST	/order	주문을 생성하며, 서버에서 재고를 최종 검증합니다.
 ❗ 모든 재고 데이터는 우선 Redis에서 조회되며, 캐시 미스 시 DB에서 fallback됩니다.
 
+🧠 더 하고 싶은 것들 (To Do)
+ Redis TTL 갱신을 위한 주기적 동기화 로직 구현
+
+ 주문 동시성 처리 (낙관적/비관적 락)
+
+ Vue/React 기반 프론트엔드 전환 및 API화
+
+ 테스트 코드 작성 및 CI 적용
+
 🙋🏻‍♂️ 만든 사람
 이름	    기술 블로그
 lilapark	https://lilapark.tistory.com
