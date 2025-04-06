@@ -36,45 +36,41 @@ Spring Boot, Spring MVC, JPA, Thymeleaf, Redis, Docker, JavaScript
 
 
 
-## 📁 프로젝트 구조
+## ⚙️ 핵심 기능
 
-📦 src
- ┣ 📂 main
- ┃ ┣ 📂 java
- ┃ ┃ ┗ 📂 jpabook
- ┃ ┃   ┗ 📂 jpashop
- ┃ ┃     ┣ 📂 controller                 # 웹 요청 처리 (Spring MVC 컨트롤러)
- ┃ ┃     ┃ ┣ 📜 BookForm.java           # 도서 등록 폼 DTO
- ┃ ┃     ┃ ┣ 📜 HomeController.java     # 홈 화면 라우팅
- ┃ ┃     ┃ ┣ 📜 ItemController.java     # 상품 관련 요청 처리
- ┃ ┃     ┃ ┣ 📜 MemberController.java   # 회원 등록 및 조회
- ┃ ┃     ┃ ┣ 📜 OrderController.java    # 주문 등록/조회/취소 처리
- ┃ ┃     ┃ ┣ 📜 RedisTestController.java# Redis 테스트용 컨트롤러
- ┃ ┃     ┃ ┗ 📜 StockController.java    # 재고 관리 처리
- ┃ ┃     ┣ 📂 domain                    # 핵심 도메인 모델 (JPA 엔티티)
- ┃ ┃     ┃ ┗ 📂 item
- ┃ ┃     ┃   ┣ 📜 Address.java          # 배송지 정보 Value Object
- ┃ ┃     ┃   ┣ 📜 Category.java         # 상품 분류
- ┃ ┃     ┃   ┣ 📜 Delivery.java         # 배송 엔티티
- ┃ ┃     ┃   ┣ 📜 DeliveryStatus.java   # 배송 상태 (ENUM)
- ┃ ┃     ┃   ┣ 📜 Member.java           # 회원 엔티티
- ┃ ┃     ┃   ┣ 📜 Order.java            # 주문 엔티티 (주문자, 상태 등 포함)
- ┃ ┃     ┃   ┣ 📜 OrderItem.java        # 주문 상품 상세 (상품, 수량, 가격 등)
- ┃ ┃     ┃   ┗ 📜 OrderStatus.java      # 주문 상태 (ENUM)
- ┃ ┃     ┣ 📂 exception                 # 커스텀 예외 정의
- ┃ ┃     ┃ ┗ 📜 NotEnoughStockException.java
- ┃ ┃     ┣ 📂 repository                # 데이터베이스 접근 계층
- ┃ ┃     ┃ ┣ 📜 ItemRepository.java
- ┃ ┃     ┃ ┣ 📜 MemberRepository.java
- ┃ ┃     ┃ ┣ 📜 OrderRepository.java
- ┃ ┃     ┃ ┗ 📜 OrderSearch.java
- ┃ ┃     ┣ 📂 service                   # 비즈니스 로직 처리
- ┃ ┃     ┃ ┣ 📜 HelloController.java
- ┃ ┃     ┃ ┣ 📜 ItemService.java
- ┃ ┃     ┃ ┣ 📜 MemberService.java
- ┃ ┃     ┃ ┣ 📜 OrderService.java
- ┃ ┃     ┃ ┗ 📜 StockService.java
- ┃ ┃     ┗ 📜 JpashopApplication.java   # Spring Boot 실행 클래스
+### ✅ 회원
+- 회원 등록 및 조회  
+- 간단한 검증 로직 포함
+
+### 📦 상품
+- 상품 등록 / 수정 / 조회  
+- 도서(Book) 예시 도메인 기반  
+- 카테고리, 재고 수량 포함
+
+### 🛒 주문
+- 상품 주문 및 취소 기능  
+- 주문 상태(ORDER / CANCEL) 관리  
+- 주문 상세 및 전체 조회
+
+### 📉 재고
+- 주문 시 재고 차감 / 취소 시 복구
+- Redis 캐싱 기반 재고 조회 API 제공  
+- 재고 부족 시 예외 발생 처리 (`NotEnoughStockException`)
+
+---
+
+## 📁 주요 패키지 설명
+
+| 패키지          | 설명                                 |
+|----------------|--------------------------------------|
+| `controller`   | 웹 요청 처리 (Spring MVC 컨트롤러)     |
+| `domain`       | 핵심 비즈니스 도메인 (JPA 엔티티)      |
+| `service`      | 비즈니스 로직 담당                     |
+| `repository`   | DB 접근 계층 (JPA 기반 Repository)     |
+| `exception`    | 재고 부족 예외 등 커스텀 예외 처리       |
+
+
+
 
 
 ## 📌 주요 API 명세
