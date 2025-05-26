@@ -24,6 +24,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    //만약 다른 곳에서 orderItems을 참조하는 곳이 있다면 cascade는 쓰면 안된다
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -92,10 +93,17 @@ public class Order {
      * 전체 주문 가격 조회
      */
     public int getTotalPrice() {
-        int totalPrice = 0;
-        for (OrderItem orderItem : orderItems) {
-            totalPrice += orderItem.getTotalPrice();
-        }
-        return totalPrice;
+        return  orderItems.stream()
+                .mapToInt(OrderItem::getTotalPrice)
+                .sum();
+
     }
+
+//    public int getTotalPrice() {
+//        int totalPrice = 0;
+//        for (OrderItem orderItem : orderItems) {
+//            totalPrice += orderItem.getTotalPrice();
+//        }
+//        return totalPrice;
+//    }
 }

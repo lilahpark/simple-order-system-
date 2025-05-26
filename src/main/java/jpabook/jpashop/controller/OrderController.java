@@ -37,6 +37,8 @@ public class OrderController {
         return "order/orderForm";
     }
 
+    //핵심 비지니스 로직이 있는 코드는 Controller에서 식별자만 넘겨주고
+    //서비스 계층에서 엔티티에 접근하게 한다
     @PostMapping("/order")
     public String order(@RequestParam("memberId") Long memberId,
                         @RequestParam("itemId") Long itemId,

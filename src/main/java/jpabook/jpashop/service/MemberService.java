@@ -15,6 +15,11 @@ public class MemberService {
     //필드 인젝션
     private final  MemberRepository memberRepository;
 
+    //롬복 @RequiredArgsConstructor 어노테이션이 생성자를 만들어주는 역할을 한다
+//    public MemberService(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+
 
 
 

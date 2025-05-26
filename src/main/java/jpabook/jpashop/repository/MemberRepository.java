@@ -26,6 +26,8 @@ public class MemberRepository {
         return em.createQuery("select m from Member m", Member.class )
                 .getResultList();
     }
+    //컨트롤 + 알트 + N 으로 인라인 해서 return 에 list 반환값 줄이기
+    //전부를 찾을 때는 jpql로 쿼리로 찾음
 
     public List<Member> findByName(String name) {
         return em.createQuery("select m from Member m where m.name= :name", Member.class)

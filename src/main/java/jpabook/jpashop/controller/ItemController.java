@@ -47,6 +47,7 @@ public class ItemController {
         return "/items/itemList";
     }
 
+
     @GetMapping("items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
         Book item = (Book) itemService.findOne(itemId);
@@ -63,6 +64,9 @@ public class ItemController {
         model.addAttribute("form", form);
         return "/items/updateItemForm";
     }
+    /**
+     * 상품 수정, 권장 코드
+     */
     @PostMapping("items/{itemId}/edit")
     public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
 
@@ -77,6 +81,12 @@ public class ItemController {
 //
 //        itemService.saveItem(book);
 
+        //Controller에 엔티티를 생성하지 않고
+        //트랜잭션이 있는 서비츠 계증에 식별자(id)으ㅏ 변경할 데이터를 명화하게 전달
+        //(파라미터 or dto)
+        //트랜잭션이 있는 서비스 계층에서 영속 상태의 엔티티를 조회하고,
+        //엔티티의 데이터를 직접 변경
+        //트랜잭션 커밋 시점에 변경 감지가 실행된다
           itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
 
         return "redirect:/items";
