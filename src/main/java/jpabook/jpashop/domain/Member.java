@@ -2,6 +2,7 @@ package jpabook.jpashop.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,8 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
+    //엔티티의 이름이 변경되면 NotEmpty로 인해 api 스펙 자체가 작동하지 않게 되는 위험이 있다
+    @NotEmpty
     private String name;
 
     @Embedded
