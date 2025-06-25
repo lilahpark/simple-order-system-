@@ -21,9 +21,11 @@ public class Member {
     @NotEmpty
     private String name;
 
+    @JsonIgnore
     @Embedded
     private Address address;
 
+    //Orders 와 양방향관계일때 하나는 이 Json~을 해줘야 한다
     @JsonIgnore
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
