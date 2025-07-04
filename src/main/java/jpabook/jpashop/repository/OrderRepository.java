@@ -120,4 +120,27 @@ public List<Order> findAllByString(OrderSearch orderSearch) {
             .getResultList();
 
     }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList();
+        //일대다 페치조인에에 페이징 사용 불가 out of memory 가능성
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return  em.createQuery(
+                "select o from Order o " +
+                        " join fetch o.member m " +
+                        " join fetch o.delivery d ", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+    //같은 주문 쿼리가 두 번 출력됨 -> distinct 사용으로 해결
+    //
 }
