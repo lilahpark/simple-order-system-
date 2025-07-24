@@ -3,6 +3,7 @@ package jpabook.jpashop.controller;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.facade.OrderFacade;
 import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.service.ItemService;
 import jpabook.jpashop.service.MemberService;
@@ -22,6 +23,7 @@ public class OrderController {
     private final OrderService orderService;
     private final MemberService memberService;
     private final ItemService itemService;
+    private final OrderFacade orderFacade;
 
 
 
@@ -44,7 +46,9 @@ public class OrderController {
                         @RequestParam("itemId") Long itemId,
                         @RequestParam("count") int count) {
 
-        orderService.order(memberId, itemId, count);
+        //orderService.order(memberId, itemId, count);
+        //Redisson 분산 락 적용
+        orderFacade.order(memberId, itemId, count);
         return "redirect:/orders";
     }
     //검색
